@@ -1,0 +1,39 @@
+---
+title: "Valencia_Map"
+author: "Juan E. Martínez Albuixech"
+date: "9 de mayo de 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r, eval=TRUE, echo=FALSE}
+setwd("C:/Users/D19902864K/Desktop/Personal/Coursera/Data Science/9. Data Visualization/Trabajos/2. Leaflet")
+datos_mapa <- read.csv("map_valencia.csv",sep="\t",  encoding="latin-1")
+
+library(leaflet)
+
+
+iconos_mapa <- icons(
+  iconUrl = datos_mapa$Picture,
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 22, iconAnchorY = 94,
+)
+
+links_mapa<-as.character(datos_mapa$enlace)
+lat<-datos_mapa$Lat
+lng<-datos_mapa$Long
+
+mapa <- leaflet() %>% 
+  addTiles() %>%
+  addMarkers(lng, lat, icon = iconos_mapa, popup = links_mapa,clusterOptions = markerClusterOptions())
+
+mapa
+
+
+```
+
